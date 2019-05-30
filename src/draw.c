@@ -6,7 +6,7 @@
 /*   By: humarque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 15:46:39 by humarque          #+#    #+#             */
-/*   Updated: 2019/05/30 13:00:43 by humarque         ###   ########.fr       */
+/*   Updated: 2019/05/30 17:33:25 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,14 @@ void	draw(t_mlx *graph ,t_build	*param)
 			x = 0;
 			y+= SPC_PIXEL;
 		}
-		view(graph,param, x, y, i);
+		view(graph, param, 0, y, i);
 		x+=SPC_PIXEL;
 		i++;
+		view(graph,param,x, y, i);
+//		bresenham(x, y, x - SPC_PIXEL, y, graph);
 	}
+//	bresen_iso(param, graph);
+	
 }
 
 

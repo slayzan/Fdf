@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:58:25 by humarque          #+#    #+#             */
-/*   Updated: 2019/05/30 12:54:20 by humarque         ###   ########.fr       */
+/*   Updated: 2019/05/30 16:11:44 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int				ft_parser(t_build *param);
 void			init_window(t_build *param);
 void			view(t_mlx *graph,t_build *param, int x, int y, int i);
 void			bresenham(int x1, int y1, int x2, int y2, t_mlx *graph);
-void			draw(t_mlx *graph,t_build *param);		
+void			draw(t_mlx *graph,t_build *param);
+void			bresen_iso(t_build *param, t_mlx *graph);
 #endif
