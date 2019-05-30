@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-void		vertical(int *x, int *y, int *xy)
+void		vertical(int *x, int *y, int *xy, t_mlx *graph)
 {
 	int		i;
 	int		e;
@@ -28,12 +28,12 @@ void		vertical(int *x, int *y, int *xy)
 			e -= y[0];
 			xy[0] += x[1];
 		}
-		printf("Point = {%d; %d}\n", xy[0], xy[1]);
+		graph->img.data[xy[1] * WIDTH + xy[0]] = 0xFFFFFF;
 		i++;
 	}
 }
 
-void		horizontal(int *x, int *y, int *xy)
+void		horizontal(int *x, int *y, int *xy, t_mlx *graph)
 {
 	int		i;
 	int		e;
@@ -49,28 +49,28 @@ void		horizontal(int *x, int *y, int *xy)
 			e -= x[0];
 			xy[1] += y[1];
 		}
-		printf("Point = {%d; %d}\n", xy[0], xy[1]);
+		graph->img.data[xy[1] * WIDTH + xy[0]] = 0xFFFFFF;
 		i++;
 	}
 }
 
-void		bresenham(int *tabxy, int x2, int y2)
+void		bresenham(int x1, int y1, int x2, int y2, t_mlx *graph)
 {
 	int		xy[2];
 	int		x[2];
 	int		y[2];
 
-	xy[0] = tabxy[0];
-	xy[1] = tabxy[1];
+	xy[0] = x1;
+	xy[1] = y1;
 	x[0] = abs(x2 - xy[0]);
 	y[0] = abs(y2 - xy[1]);
 	x[1] = xy[0] < x2 ? 1 : -1;
 	y[1] = xy[1] < y2 ? 1 : -1;
-	printf("Point = {%d; %d}\n", xy[0], xy[1]);
+	graph->img.data[xy[1] * WIDTH + xy[0]] = 0xFFFFFF;
 	if (x[0] > y[0])
-		horizontal(x, y, xy);
+		horizontal(x, y, xy, graph);
 	else
-		vertical(x, y, xy);
+		vertical(x, y, xy, graph);
 }
 
 // int main()
