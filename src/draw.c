@@ -6,7 +6,7 @@
 /*   By: humarque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 15:46:39 by humarque          #+#    #+#             */
-/*   Updated: 2019/05/29 18:57:12 by humarque         ###   ########.fr       */
+/*   Updated: 2019/05/30 13:00:43 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void	draw(t_mlx *graph ,t_build	*param)
 	x = 0;
 	y = 0;
 	i = 0;
-	while (x < param->map.taille || y < param->map.hauteur - 1)
+	while (x < param->map.taille * SPC_PIXEL || y < param->map.hauteur * SPC_PIXEL - 1)
 	{
-		if(x == param->map.taille)
+		if(x == param->map.taille *SPC_PIXEL)
 		{
 			x = 0;
-			y++;
+			y+= SPC_PIXEL;
 		}
 		view(graph,param, x, y, i);
-		x++;
+		x+=SPC_PIXEL;
 		i++;
 	}
 }

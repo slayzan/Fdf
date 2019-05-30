@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 15:03:51 by humarque          #+#    #+#             */
-/*   Updated: 2019/05/29 18:29:42 by humarque         ###   ########.fr       */
+/*   Updated: 2019/05/30 12:59:00 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void			init_window(t_build *param)
 	graph.img.img_ptr = mlx_new_image(graph.mlx_ptr, WIDTH, HEIGHT);
 	graph.img.data = (int *)mlx_get_data_addr(graph.img.img_ptr
 		, &graph.img.bpp, &graph.img.size_l, &graph.img.endian);
-	//find_mid(param);
+	find_mid(param);
 	//param->map.sx = param->map.midx;
 	//ft_draw(param, &graph, param->first, y);
 	draw(&graph,param);
