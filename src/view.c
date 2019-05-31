@@ -6,7 +6,7 @@
 /*   By: humarque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 11:05:29 by humarque          #+#    #+#             */
-/*   Updated: 2019/05/30 17:33:21 by humarque         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:52:03 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/fdf.h"
@@ -26,6 +26,21 @@
 	
 
 }*/
+
+int		ft_calx(int prev_x, int prev_y, t_build *param)
+{
+	int x;
+
+	x = (prev_x - prev_y) * -cos(0.523599) + param->map.midx;
+	return (x);
+}
+
+int 	ft_caly(int prev_x, int prev_y, int i, t_build *param)
+{
+	int y;
+	y = -param->map.grille[i] + (prev_x  + prev_y) * sin(0.523599) + param->map.midy;
+	return (y);
+}
 void	isometric(t_mlx *graph,int x, int y,t_build *param, int i)
 {
 	int prev_x;
@@ -39,7 +54,15 @@ void	isometric(t_mlx *graph,int x, int y,t_build *param, int i)
 	x = (prev_x - prev_y) * cos(0.523599) + param->map.midx;
 	y = -param->map.grille[i] + (prev_x  + prev_y) * sin(0.523599) + param->map.midy;
 
-	printf("%d\n", x);
+	if(param->first == 1)
+	{
+		while (a != SPC_PIXEL)
+		{
+			bresenham(x,y, ft_calx(prev_x, prev_y, param), ft_caly(prev_x,prev_y,i,param), graph);
+			a++;
+		}
+	}
+	a = 0;
 	if (prev_x != 0)
 	{	
 		while (a != SPC_PIXEL)
@@ -48,7 +71,6 @@ void	isometric(t_mlx *graph,int x, int y,t_build *param, int i)
 			a++;
 		}
 	}
-
 	param->map.sy = y;
 	param->map.sx = x;
 	//graph->img.data[y * WIDTH + x] = 0xFFFFFF;

@@ -6,7 +6,7 @@
 /*   By: humarque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 15:46:39 by humarque          #+#    #+#             */
-/*   Updated: 2019/05/30 17:33:25 by humarque         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:51:07 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,23 @@ void	draw(t_mlx *graph ,t_build	*param)
 	int		y;
 	int 	i;
 
+	param->first = 0;
 	x = 0;
 	y = 0;
 	i = 0;
+
 	while (x < param->map.taille * SPC_PIXEL || y < param->map.hauteur * SPC_PIXEL - 1)
 	{
 		if(x == param->map.taille *SPC_PIXEL)
 		{
 			x = 0;
 			y+= SPC_PIXEL;
+			param->first = 1;
 		}
-		view(graph, param, 0, y, i);
+
+		view(graph,param,x, y, i);
 		x+=SPC_PIXEL;
 		i++;
-		view(graph,param,x, y, i);
-//		bresenham(x, y, x - SPC_PIXEL, y, graph);
 	}
 //	bresen_iso(param, graph);
 	

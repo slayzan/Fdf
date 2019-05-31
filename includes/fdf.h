@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:58:25 by humarque          #+#    #+#             */
-/*   Updated: 2019/05/30 16:11:44 by humarque         ###   ########.fr       */
+/*   Updated: 2019/05/31 12:21:40 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct	s_build
 {
 	char	*name;
 	int		first;
+	int		test;
 	int		proj;
 	t_map	map;
 	t_move move;
