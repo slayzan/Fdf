@@ -8,7 +8,7 @@ INC_PATH = ./include/ $(LIB_PATH)libft/include/
 
 GCC_FLGS = -Werror -Wextra -Wall
 
-SRC_NAME = main.c ft_parser.c fdf.c bresenham.c draw.c view.c
+SRC_NAME = main.c parser.c fdf.c bresenham.c draw.c isometric.c
 
 GCC_LIBS = -lmlx -framework OpenGL -framework Appkit
 

@@ -25,7 +25,7 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		params.name = argv[1];
-		if (!(ft_parser(&params)))
+		if (!(parser(&params)))
 			return (0);
 		else
 			init_window(&params);

@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-int		ft_calx(int prev_x, int prev_y, t_build *param)
+int		calx(int prev_x, int prev_y, t_build *param)
 {
 	int x;
 
@@ -20,7 +20,7 @@ int		ft_calx(int prev_x, int prev_y, t_build *param)
 	return (x);
 }
 
-int		ft_caly(int prev_x, int prev_y, int j, t_build *param)
+int		caly(int prev_x, int prev_y, int j, t_build *param)
 {
 	int y;
 
@@ -29,7 +29,7 @@ int		ft_caly(int prev_x, int prev_y, int j, t_build *param)
 	return (y);
 }
 
-void	isometric1(t_mlx *graph, int x, int y, t_build *param, int i, int j)
+void	isometric(t_mlx *graph, int x, int y, t_build *param, int i, int j)
 {
 	int		prev_x;
 	int		prev_y;
@@ -44,8 +44,8 @@ void	isometric1(t_mlx *graph, int x, int y, t_build *param, int i, int j)
 	if (prev_y >= 30)
 	{
 		savey = prev_y - 30;
-		bresenham(x, y, ft_calx(prev_x, savey, param),
-			ft_caly(prev_x, savey, j, param), graph);
+		bresenham(x, y, calx(prev_x, savey, param),
+			caly(prev_x, savey, j, param), graph);
 	}
 	if (prev_x != 0)
 		bresenham(x, y, param->map.sx, param->map.sy, graph);

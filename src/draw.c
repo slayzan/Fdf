@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-static void		draw(t_mlx *graph, t_build *param)
+static void		draw_iso(t_mlx *graph, t_build *param)
 {
 	int		x;
 	int		y;
@@ -33,7 +33,7 @@ static void		draw(t_mlx *graph, t_build *param)
 			y += SPC_PIXEL;
 			param->first = 1;
 		}
-		isometric1(graph, x, y, param, i, j);
+		isometric(graph, x, y, param, i, j);
 		x += SPC_PIXEL;
 		i++;
 		if (y >= 1)
@@ -41,7 +41,7 @@ static void		draw(t_mlx *graph, t_build *param)
 	}
 }
 
-static void		ft_cadre(t_build *param, t_mlx *graph, int function, int x)
+static void		cadre(t_build *param, t_mlx *graph, int function, int x)
 {
 	int		i;
 
@@ -67,7 +67,7 @@ static void		ft_cadre(t_build *param, t_mlx *graph, int function, int x)
 	}
 }
 
-static void		ft_draw(t_build *param, t_mlx *graph, int first, int y)
+static void		draw_para(t_build *param, t_mlx *graph, int first, int y)
 {
 	int		x;
 	int		i;
@@ -80,9 +80,9 @@ static void		ft_draw(t_build *param, t_mlx *graph, int first, int y)
 		{
 			graph->img.data[param->map.midy * WIDTH + param->map.sx] = 0xFFFFFF;
 			if (first)
-				ft_cadre(param, graph, 1, x);
+				cadre(param, graph, 1, x);
 			param->map.sy = param->map.midy;
-			ft_cadre(param, graph, 0, x);
+			cadre(param, graph, 0, x);
 			x++;
 		}
 		param->map.midy = param->map.midy + SPC_PIXEL;
@@ -96,10 +96,10 @@ static void		ft_draw(t_build *param, t_mlx *graph, int first, int y)
 void			view(t_mlx *graph, t_build *param, int y, int i)
 {
 	if (param->proj == 0)
-		draw(graph, param);
+		draw_iso(graph, param);
 	if (param->proj == 1)
 	{
 		param->map.sx = param->map.midx;
-		ft_draw(param, graph, param->first - 1, y);
+		draw_para(param, graph, param->first - 1, y);
 	}
 }
