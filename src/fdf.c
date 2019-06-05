@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 15:03:51 by humarque          #+#    #+#             */
-/*   Updated: 2019/05/30 12:59:00 by humarque         ###   ########.fr       */
+/*   Updated: 2019/05/31 18:33:50 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void			init_window(t_build *param)
 
 	i = 0;
 	y = 0;
+	param->proj = 0;
 	param->first = 1;
 	graph.mlx_ptr = mlx_init();
 	graph.mlx_window = mlx_new_window(graph.mlx_ptr, WIDTH, HEIGHT
