@@ -30,13 +30,13 @@ typedef	struct	s_img
 	int		endian;
 }				t_img;
 
-typedef struct s_move
+typedef struct	s_move
 {
 	int		z;
 	int		blanck;
 	int		x;
 	int		y;
-}			t_move;
+}				t_move;
 typedef struct	s_map
 {
 	int taille;
@@ -63,13 +63,13 @@ typedef struct	s_build
 	int		testy;
 	int		proj;
 	t_map	map;
-	t_move move;
+	t_move	move;
 }				t_build;
 
-int				ft_parser(t_build *param);
+int				parser(t_build *param);
 void			init_window(t_build *param);
-void			view(t_mlx *graph,t_build *param, int x, int y, int i, int j);
+void			view(t_mlx *graph, t_build *param, int y, int i);
 void			bresenham(int x1, int y1, int x2, int y2, t_mlx *graph);
-void			draw(t_mlx *graph,t_build *param);
-void			bresen_iso(t_build *param, t_mlx *graph);
+void			isometric(t_mlx *graph, int x, int y,
+	t_build *param, int i, int j);
 #endif
