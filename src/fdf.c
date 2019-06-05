@@ -6,21 +6,44 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 15:03:51 by humarque          #+#    #+#             */
-/*   Updated: 2019/05/31 18:33:50 by humarque         ###   ########.fr       */
+/*   Updated: 2019/06/05 18:46:36 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
+static void		spc_finder(t_build *param)
+{
+	int spc;
+
+	spc = 0;
+	while ((spc * param->map.hauteur) < (HEIGHT - (HEIGHT / 2)) &&
+	(spc * param->map.taille) < (WIDTH - (WIDTH / 2)))
+		spc += 1;
+	spc -= 1;
+	param->map.spc = spc;
+}
+
 static void		find_mid(t_build *param)
 {
-	param->map.midx = (WIDTH / 2) - ((param->map.taille / 2) * SPC_PIXEL - 1);
-	param->map.midy = (HEIGHT / 2) - ((param->map.hauteur / 2) * SPC_PIXEL - 1);
+	int x;
+	int y;
+	int j;
+
+	x = 640;
+	y = 360;
+	j = param->map.hauteur / 2 - 1;
+	while (j >= 0)
+	{
+		y -= param->map.spc;
+		j--;
+	}
+	param->map.midx = x;
+	param->map.midy = y;
 }
 
 static int		key_press(int keycode, t_build *param)
 {
-	//printf("keycode = %d\n", keycode);
 	if (keycode == 53)
 		exit(0);
 	if (keycode == 34)
@@ -46,10 +69,11 @@ void			init_window(t_build *param)
 	graph.img.img_ptr = mlx_new_image(graph.mlx_ptr, WIDTH, HEIGHT);
 	graph.img.data = (int *)mlx_get_data_addr(graph.img.img_ptr
 		, &graph.img.bpp, &graph.img.size_l, &graph.img.endian);
+	spc_finder(param);
 	find_mid(param);
 	view(&graph, param, y, i);
 	mlx_hook(graph.mlx_window, 2, 0, key_press, param);
-	mlx_put_image_to_window(graph.mlx_ptr, graph.mlx_window
-			, graph.img.img_ptr, 0, 0);
+	mlx_put_image_to_window(graph.mlx_ptr, graph.mlx_window,
+	graph.img.img_ptr, 0, 0);
 	mlx_loop(graph.mlx_ptr);
 }

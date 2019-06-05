@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:58:25 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/05 11:39:45 by humarque         ###   ########.fr       */
+/*   Updated: 2019/06/05 17:49:45 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "../lib/libft/libft.h"
 # include "../lib/libft/get_next_line.h"
 # define BUFFER 1280 * 720
-# define SPC_PIXEL 30
 # define HEIGHT 720
 # define WIDTH 1280
 
@@ -46,6 +45,7 @@ typedef struct	s_map
 	int sx;
 	int sy;
 	int grille[BUFFER];
+	int spc;
 }				t_map;
 
 typedef struct	s_mlx
@@ -70,6 +70,6 @@ int				parser(t_build *param);
 void			init_window(t_build *param);
 void			view(t_mlx *graph, t_build *param, int y, int i);
 void			bresenham(int x1, int y1, int x2, int y2, t_mlx *graph);
-void			isometric(t_mlx *graph, int x, int y,
-	t_build *param, int i, int j);
+void			isometric(t_mlx *graph, int x, int y, t_build *param, int i,
+int j);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: humarque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 15:46:39 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/05 11:35:32 by humarque         ###   ########.fr       */
+/*   Updated: 2019/06/05 17:55:47 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ static void		draw_iso(t_mlx *graph, t_build *param)
 	y = 0;
 	i = 0;
 	j = 0;
-	while (x < param->map.taille * SPC_PIXEL ||
-		y < param->map.hauteur * SPC_PIXEL - 1)
+	while (x < param->map.taille * param->map.spc ||
+	y < param->map.hauteur * param->map.spc - 1)
 	{
-		if (x == param->map.taille * SPC_PIXEL)
+		if (x == param->map.taille * param->map.spc)
 		{
 			x = 0;
-			y += SPC_PIXEL;
+			y += param->map.spc;
 			param->first = 1;
 		}
 		isometric(graph, x, y, param, i, j);
-		x += SPC_PIXEL;
+		x += param->map.spc;
 		i++;
 		if (y >= 1)
 			j++;
@@ -48,21 +48,21 @@ static void		cadre(t_build *param, t_mlx *graph, int function, int x)
 	i = -1;
 	if (function)
 	{
-		while (++i < SPC_PIXEL)
+		while (++i < param->map.spc)
 		{
 			bresenham(param->map.sx, param->map.sy,
-					param->map.sx, param->map.sy - 1, graph);
+			param->map.sx, param->map.sy - 1, graph);
 			param->map.sy--;
 		}
 	}
 	else
 	{
-		while (++i < SPC_PIXEL)
+		while (++i < param->map.spc)
 		{
 			param->map.sx++;
 			if (x != param->map.taille - 1)
 				bresenham(param->map.sx - 1, param->map.midy,
-					param->map.sx, param->map.midy, graph);
+				param->map.sx, param->map.midy, graph);
 		}
 	}
 }
@@ -85,7 +85,7 @@ static void		draw_para(t_build *param, t_mlx *graph, int first, int y)
 			cadre(param, graph, 0, x);
 			x++;
 		}
-		param->map.midy = param->map.midy + SPC_PIXEL;
+		param->map.midy = param->map.midy + param->map.spc;
 		param->map.sy = param->map.midy;
 		first = 1;
 		param->map.sx = param->map.midx;
