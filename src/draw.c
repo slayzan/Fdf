@@ -95,9 +95,9 @@ static void		draw_para(t_build *param, t_mlx *graph, int first, int y)
 
 void			view(t_mlx *graph, t_build *param, int y, int i)
 {
-	if (param->proj == 0)
-		draw_iso(graph, param);
 	if (param->proj == 1)
+		draw_iso(graph, param);
+	if (param->proj == 0)
 	{
 		param->map.sx = param->map.midx;
 		draw_para(param, graph, param->first - 1, y);

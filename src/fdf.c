@@ -18,11 +18,15 @@ static void		find_mid(t_build *param)
 	param->map.midy = (HEIGHT / 2) - ((param->map.hauteur / 2) * SPC_PIXEL - 1);
 }
 
-static int		key_press(int keycode, void *param)
+static int		key_press(int keycode, t_build *param)
 {
-	(void)param;
+	//printf("keycode = %d\n", keycode);
 	if (keycode == 53)
 		exit(0);
+	if (keycode == 34)
+		param->proj = 0;
+	if (keycode == 35)
+		param->proj = 1;
 	return (0);
 }
 
@@ -44,7 +48,7 @@ void			init_window(t_build *param)
 		, &graph.img.bpp, &graph.img.size_l, &graph.img.endian);
 	find_mid(param);
 	view(&graph, param, y, i);
-	mlx_hook(graph.mlx_window, 2, 0, key_press, (void*)0);
+	mlx_hook(graph.mlx_window, 2, 0, key_press, param);
 	mlx_put_image_to_window(graph.mlx_ptr, graph.mlx_window
 			, graph.img.img_ptr, 0, 0);
 	mlx_loop(graph.mlx_ptr);
