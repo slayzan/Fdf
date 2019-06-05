@@ -6,7 +6,7 @@
 /*   By: humarque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 15:46:39 by humarque          #+#    #+#             */
-/*   Updated: 2019/05/31 18:32:24 by humarque         ###   ########.fr       */
+/*   Updated: 2019/06/05 11:35:32 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ void	draw(t_mlx *graph ,t_build	*param)
 	int		x;
 	int		y;
 	int 	i;
+	int		j;
 
 	param->first = 0;
 	x = 0;
 	y = 0;
 	i = 0;
+	j = 0;
 	while (x < param->map.taille * SPC_PIXEL || y < param->map.hauteur * SPC_PIXEL - 1)
 	{
 		if(x == param->map.taille *SPC_PIXEL)
@@ -32,10 +34,12 @@ void	draw(t_mlx *graph ,t_build	*param)
 			param->first = 1;
 		}
 
-		view(graph,param,x, y, i);
+		view(graph,param,x, y, i, j);
 
 		x+=SPC_PIXEL;
 		i++;
+		if (y >= 1)
+			j++;
 	}
 //	bresen_iso(param, graph);
 	
