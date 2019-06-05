@@ -72,12 +72,3 @@ void		bresenham(int x1, int y1, int x2, int y2, t_mlx *graph)
 	else
 		vertical(x, y, xy, graph);
 }
-
-// int main()
-// {
-// 	int tabxy[2] = {-6, 4};
-// 	int x2 = 9;
-// 	int y2 = -5;
-// 	bresenham(tabxy, x2, y2);
-// 	return (0);
-// }

@@ -11,11 +11,13 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
 void	ft_init(t_build *param)
 {
 	param->move.x = 0;
 	param->move.y = 0;
 }
+
 int		main(int argc, char **argv)
 {
 	t_build		params;
@@ -26,8 +28,6 @@ int		main(int argc, char **argv)
 		if (!(ft_parser(&params)))
 			return (0);
 		else
-		{
 			init_window(&params);
-		}
 	}
 }
