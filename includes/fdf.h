@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:58:25 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/06 11:02:46 by humarque         ###   ########.fr       */
+/*   Updated: 2019/06/06 16:34:15 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,5 @@ void			view(t_build *param, int y, int i);
 void			bresenham(int x1, int y1, int x2, int y2, t_build *param);
 void			isometric(int x, int y, t_build *param, int i,
 int j);
+int				key_press(int keycode, t_build *param);
 #endif

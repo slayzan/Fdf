@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 15:03:51 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/06 11:02:16 by humarque         ###   ########.fr       */
+/*   Updated: 2019/06/06 18:20:25 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,6 @@ static void		find_mid(t_build *param)
 	param->map.midy = y;
 }
 
-static int		key_press(int keycode, t_build *param)
-{
-	if (keycode == 53)
-		exit(0);
-	if (keycode == 34)
-		param->proj = 0;
-	if (keycode == 35)
-		param->proj = 1;
-	return (0);
-}
-
 void			init_window(t_build *param)
 {
 	int		i;
@@ -64,10 +53,10 @@ void			init_window(t_build *param)
 	param->first = 1;
 	param->graph.mlx_ptr = mlx_init();
 	param->graph.mlx_window = mlx_new_window(param->graph.mlx_ptr, WIDTH, HEIGHT
-		, param->name);
+	, param->name);
 	param->graph.img.img_ptr = mlx_new_image(param->graph.mlx_ptr, WIDTH, HEIGHT);
 	param->graph.img.data = (int *)mlx_get_data_addr(param->graph.img.img_ptr
-		, &param->graph.img.bpp, &param->graph.img.size_l, &param->graph.img.endian);
+	, &param->graph.img.bpp, &param->graph.img.size_l, &param->graph.img.endian);
 	spc_finder(param);
 	find_mid(param);
 	view(param, y, i);
