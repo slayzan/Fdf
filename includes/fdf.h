@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:58:25 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/05 17:49:45 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/06/06 11:02:46 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,13 @@ typedef struct	s_build
 	int		proj;
 	t_map	map;
 	t_move	move;
+	t_mlx	graph;
 }				t_build;
 
 int				parser(t_build *param);
 void			init_window(t_build *param);
-void			view(t_mlx *graph, t_build *param, int y, int i);
-void			bresenham(int x1, int y1, int x2, int y2, t_mlx *graph);
-void			isometric(t_mlx *graph, int x, int y, t_build *param, int i,
+void			view(t_build *param, int y, int i);
+void			bresenham(int x1, int y1, int x2, int y2, t_build *param);
+void			isometric(int x, int y, t_build *param, int i,
 int j);
 #endif

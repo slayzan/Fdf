@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: humarque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/09 16:09:22 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/06 11:01:56 by humarque         ###   ########.fr       */
+/*   Created: 2019/06/06 10:30:30 by humarque          #+#    #+#             */
+/*   Updated: 2019/06/06 11:02:56 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
-
-void	ft_init(t_build *param)
+void	changeview(t_build *param);
 {
-	param->move.x = 0;
-	param->move.y = 0;
+	
 }
 
-int		main(int argc, char **argv)
+void	ft_key_hook(int keycode, t_build *param)
 {
-	t_build		params;
-
-	if (argc == 2)
+	if (keycode == 53)
+		exit(0);
+	if (keycode == 34)
 	{
-		params.name = argv[1];
-		if (!(parser(&params)))
-			return (0);
-		else
-			init_window(&params);
+		param->proj = 0 ? 1 : 0;
+		changeview(param);
 	}
 }
+

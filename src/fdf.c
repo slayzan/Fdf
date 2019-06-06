@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 15:03:51 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/05 18:46:36 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/06/06 11:02:16 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static int		key_press(int keycode, t_build *param)
 
 void			init_window(t_build *param)
 {
-	t_mlx	graph;
 	int		i;
 	int		y;
 
@@ -63,17 +62,17 @@ void			init_window(t_build *param)
 	y = 0;
 	param->proj = 1;
 	param->first = 1;
-	graph.mlx_ptr = mlx_init();
-	graph.mlx_window = mlx_new_window(graph.mlx_ptr, WIDTH, HEIGHT
+	param->graph.mlx_ptr = mlx_init();
+	param->graph.mlx_window = mlx_new_window(param->graph.mlx_ptr, WIDTH, HEIGHT
 		, param->name);
-	graph.img.img_ptr = mlx_new_image(graph.mlx_ptr, WIDTH, HEIGHT);
-	graph.img.data = (int *)mlx_get_data_addr(graph.img.img_ptr
-		, &graph.img.bpp, &graph.img.size_l, &graph.img.endian);
+	param->graph.img.img_ptr = mlx_new_image(param->graph.mlx_ptr, WIDTH, HEIGHT);
+	param->graph.img.data = (int *)mlx_get_data_addr(param->graph.img.img_ptr
+		, &param->graph.img.bpp, &param->graph.img.size_l, &param->graph.img.endian);
 	spc_finder(param);
 	find_mid(param);
-	view(&graph, param, y, i);
-	mlx_hook(graph.mlx_window, 2, 0, key_press, param);
-	mlx_put_image_to_window(graph.mlx_ptr, graph.mlx_window,
-	graph.img.img_ptr, 0, 0);
-	mlx_loop(graph.mlx_ptr);
+	view(param, y, i);
+	mlx_hook(param->graph.mlx_window, 2, 0, key_press, param);
+	mlx_put_image_to_window(param->graph.mlx_ptr, param->graph.mlx_window,
+	param->graph.img.img_ptr, 0, 0);
+	mlx_loop(param->graph.mlx_ptr);
 }

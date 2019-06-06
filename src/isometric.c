@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 11:05:29 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/05 18:38:13 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/06/06 11:05:18 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		caly(int prev_x, int prev_y, int j, t_build *param)
 	return (y);
 }
 
-void	isometric(t_mlx *graph, int x, int y, t_build *param, int i, int j)
+void	isometric(int x, int y, t_build *param, int i, int j)
 {
 	int		prev_x;
 	int		prev_y;
@@ -45,11 +45,11 @@ void	isometric(t_mlx *graph, int x, int y, t_build *param, int i, int j)
 	{
 		savey = prev_y - param->map.spc;
 		bresenham(x, y, calx(prev_x, savey, param),
-			caly(prev_x, savey, j, param), graph);
+			caly(prev_x, savey, j, param), param);
 	}
 	if (prev_x != 0)
-		bresenham(x, y, param->map.sx, param->map.sy, graph);
+		bresenham(x, y, param->map.sx, param->map.sy, param);
 	param->map.sy = y;
 	param->map.sx = x;
-	graph->img.data[y * WIDTH + x] = 0xFFFFFF;
+	param->graph.img.data[y * WIDTH + x] = 0xFFFFFF;
 }

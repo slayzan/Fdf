@@ -6,13 +6,13 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:09:28 by kwatanab          #+#    #+#             */
-/*   Updated: 2019/05/22 17:09:50 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/06/06 11:03:49 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void		vertical(int *x, int *y, int *xy, t_mlx *graph)
+void		vertical(int *x, int *y, int *xy, t_build *param)
 {
 	int		i;
 	int		e;
@@ -28,12 +28,12 @@ void		vertical(int *x, int *y, int *xy, t_mlx *graph)
 			e -= y[0];
 			xy[0] += x[1];
 		}
-		graph->img.data[xy[1] * WIDTH + xy[0]] = 0xFFFFFF;
+		param->graph.img.data[xy[1] * WIDTH + xy[0]] = 0xFFFFFF;
 		i++;
 	}
 }
 
-void		horizontal(int *x, int *y, int *xy, t_mlx *graph)
+void		horizontal(int *x, int *y, int *xy, t_build *param)
 {
 	int		i;
 	int		e;
@@ -49,12 +49,12 @@ void		horizontal(int *x, int *y, int *xy, t_mlx *graph)
 			e -= x[0];
 			xy[1] += y[1];
 		}
-		graph->img.data[xy[1] * WIDTH + xy[0]] = 0xFFFFFF;
+		param->graph.img.data[xy[1] * WIDTH + xy[0]] = 0xFFFFFF;
 		i++;
 	}
 }
 
-void		bresenham(int x1, int y1, int x2, int y2, t_mlx *graph)
+void		bresenham(int x1, int y1, int x2, int y2, t_build *param)
 {
 	int		xy[2];
 	int		x[2];
@@ -66,9 +66,9 @@ void		bresenham(int x1, int y1, int x2, int y2, t_mlx *graph)
 	y[0] = abs(y2 - xy[1]);
 	x[1] = xy[0] < x2 ? 1 : -1;
 	y[1] = xy[1] < y2 ? 1 : -1;
-	graph->img.data[xy[1] * WIDTH + xy[0]] = 0xFFFFFF;
+	param->graph.img.data[xy[1] * WIDTH + xy[0]] = 0xFFFFFF;
 	if (x[0] > y[0])
-		horizontal(x, y, xy, graph);
+		horizontal(x, y, xy, param);
 	else
-		vertical(x, y, xy, graph);
+		vertical(x, y, xy, param);
 }
