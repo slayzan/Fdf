@@ -45,10 +45,10 @@ static void		cadre(t_build *param, int function, int x)
 {
 	int		i;
 
-	i = -1;
+	i = 0;
 	if (function)
 	{
-		while (++i < param->map.spc)
+		while (++i < param->map.spc + 1)
 		{
 			bresenham(param->map.sx, param->map.sy,
 			param->map.sx, param->map.sy - 1, param);
@@ -57,7 +57,7 @@ static void		cadre(t_build *param, int function, int x)
 	}
 	else
 	{
-		while (++i < param->map.spc)
+		while (++i < param->map.spc + 1)
 		{
 			param->map.sx++;
 			if (x != param->map.taille - 1)
@@ -67,18 +67,22 @@ static void		cadre(t_build *param, int function, int x)
 	}
 }
 
-static void		draw_para(t_build *param, int first, int y)
+static void		draw_para(t_build *param)
 {
 	int		x;
 	int		i;
+	int		y;
+	int		first;
 
 	i = 0;
+	y = 0;
+	first = 0;
 	while (y < param->map.hauteur)
 	{
 		x = 0;
 		while (x < param->map.taille)
 		{
-			param->graph.img.data[param->map.midy * WIDTH + param->map.sx] = 0xFFFFFF;
+			param->graph.img.data[param->map.midy * WIDTH + param->map.sx] = param->move.color;
 			if (first)
 				cadre(param, 1, x);
 			param->map.sy = param->map.midy;
@@ -90,16 +94,17 @@ static void		draw_para(t_build *param, int first, int y)
 		first = 1;
 		param->map.sx = param->map.midx;
 		y++;
+		i++;
 	}
 }
 
-void			view(t_build *param, int y, int i)
+void			view(t_build *param)
 {
-	if (param->proj == 1)
+	if (param->move.proj == 1)
 		draw_iso(param);
-	if (param->proj == 0)
+	if (param->move.proj == 0)
 	{
 		param->map.sx = param->map.midx;
-		draw_para(param, param->first - 1, y);
+		draw_para(param);
 	}
 }

@@ -31,10 +31,10 @@ typedef	struct	s_img
 
 typedef struct	s_move
 {
-	int		z;
-	int		blanck;
-	int		x;
-	int		y;
+	int color;
+	int proj;
+	int movex;
+	int movey;
 }				t_move;
 typedef struct	s_map
 {
@@ -59,9 +59,6 @@ typedef struct	s_build
 {
 	char	*name;
 	int		first;
-	int		testx;
-	int		testy;
-	int		proj;
 	t_map	map;
 	t_move	move;
 	t_mlx	graph;
@@ -69,9 +66,10 @@ typedef struct	s_build
 
 int				parser(t_build *param);
 void			init_window(t_build *param);
-void			view(t_build *param, int y, int i);
+void			view(t_build *param);
 void			bresenham(int x1, int y1, int x2, int y2, t_build *param);
 void			isometric(int x, int y, t_build *param, int i,
 int j);
-int				key_press(int keycode, t_build *param);
+void			find_mid(t_build *param);
+int				key_hook(int keycode, t_build *param);
 #endif

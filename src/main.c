@@ -12,12 +12,6 @@
 
 #include "../includes/fdf.h"
 
-void	ft_init(t_build *param)
-{
-	param->move.x = 0;
-	param->move.y = 0;
-}
-
 int		main(int argc, char **argv)
 {
 	t_build		params;

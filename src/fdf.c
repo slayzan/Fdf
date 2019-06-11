@@ -24,7 +24,7 @@ static void		spc_finder(t_build *param)
 	param->map.spc = spc;
 }
 
-static void		find_mid(t_build *param)
+void			find_mid(t_build *param)
 {
 	int x;
 	int y;
@@ -49,7 +49,8 @@ void			init_window(t_build *param)
 
 	i = 0;
 	y = 0;
-	param->proj = 1;
+	param->move.proj = 0;
+	param->move.color = 0xFFFFFF;
 	param->first = 1;
 	param->graph.mlx_ptr = mlx_init();
 	param->graph.mlx_window = mlx_new_window(param->graph.mlx_ptr, WIDTH, HEIGHT
@@ -59,8 +60,8 @@ void			init_window(t_build *param)
 	, &param->graph.img.bpp, &param->graph.img.size_l, &param->graph.img.endian);
 	spc_finder(param);
 	find_mid(param);
-	view(param, y, i);
-	mlx_hook(param->graph.mlx_window, 2, 0, key_press, param);
+	view(param);
+	mlx_hook(param->graph.mlx_window, 2, 0, key_hook, param);
 	mlx_put_image_to_window(param->graph.mlx_ptr, param->graph.mlx_window,
 	param->graph.img.img_ptr, 0, 0);
 	mlx_loop(param->graph.mlx_ptr);

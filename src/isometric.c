@@ -51,5 +51,5 @@ void	isometric(int x, int y, t_build *param, int i, int j)
 		bresenham(x, y, param->map.sx, param->map.sy, param);
 	param->map.sy = y;
 	param->map.sx = x;
-	param->graph.img.data[y * WIDTH + x] = 0xFFFFFF;
+	param->graph.img.data[y * WIDTH + x] = param->move.color;
 }

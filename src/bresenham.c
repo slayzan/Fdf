@@ -28,7 +28,7 @@ void		vertical(int *x, int *y, int *xy, t_build *param)
 			e -= y[0];
 			xy[0] += x[1];
 		}
-		param->graph.img.data[xy[1] * WIDTH + xy[0]] = 0xFFFFFF;
+		param->graph.img.data[xy[1] * WIDTH + xy[0]] = param->move.color;
 		i++;
 	}
 }
@@ -49,7 +49,7 @@ void		horizontal(int *x, int *y, int *xy, t_build *param)
 			e -= x[0];
 			xy[1] += y[1];
 		}
-		param->graph.img.data[xy[1] * WIDTH + xy[0]] = 0xFFFFFF;
+		param->graph.img.data[xy[1] * WIDTH + xy[0]] = param->move.color;
 		i++;
 	}
 }
@@ -66,7 +66,7 @@ void		bresenham(int x1, int y1, int x2, int y2, t_build *param)
 	y[0] = abs(y2 - xy[1]);
 	x[1] = xy[0] < x2 ? 1 : -1;
 	y[1] = xy[1] < y2 ? 1 : -1;
-	param->graph.img.data[xy[1] * WIDTH + xy[0]] = 0xFFFFFF;
+	param->graph.img.data[xy[1] * WIDTH + xy[0]] = param->move.color;
 	if (x[0] > y[0])
 		horizontal(x, y, xy, param);
 	else
