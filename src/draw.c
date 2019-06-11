@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 15:46:39 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/06 11:05:05 by humarque         ###   ########.fr       */
+/*   Updated: 2019/06/11 18:33:45 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ static void		cadre(t_build *param, int function, int x)
 	{
 		while (++i < param->map.spc + 1)
 		{
-			bresenham(param->map.sx, param->map.sy,
-			param->map.sx, param->map.sy - 1, param);
-			param->map.sy--;
+			if ((param->map.sx > 0 && param->map.sx < WIDTH) && (param->map.sy > 0 && param->map.sy < HEIGHT) && (param->map.sy - 1 > 0 && param->map.sy - 1 < HEIGHT))
+				bresenham(param->map.sx, param->map.sy,
+				param->map.sx, param->map.sy - 1, param);
+				param->map.sy--;
 		}
 	}
 	else
@@ -61,8 +62,11 @@ static void		cadre(t_build *param, int function, int x)
 		{
 			param->map.sx++;
 			if (x != param->map.taille - 1)
-				bresenham(param->map.sx - 1, param->map.midy,
-				param->map.sx, param->map.midy, param);
+			{
+				if ((param->map.sx - 1 > 0 && param->map.sx - 1 < WIDTH) && (param->map.midy > 0 && param->map.midy < HEIGHT) && (param->map.sx > 0 && param->map.sx < WIDTH))
+					bresenham(param->map.sx - 1, param->map.midy,
+					param->map.sx, param->map.midy, param);
+			}
 		}
 	}
 }
@@ -82,7 +86,8 @@ static void		draw_para(t_build *param)
 		x = 0;
 		while (x < param->map.taille)
 		{
-			param->graph.img.data[param->map.midy * WIDTH + param->map.sx] = param->move.color;
+			if ((param->map.sx > 0 && param->map.sx - 1 < WIDTH) && (param->map.midy > 0 && param->map.midy < HEIGHT))
+				param->graph.img.data[param->map.midy * WIDTH + param->map.sx] = param->move.color;
 			if (first)
 				cadre(param, 1, x);
 			param->map.sy = param->map.midy;

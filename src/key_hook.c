@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 10:30:30 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/06 18:18:55 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/06/11 18:05:53 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ static void		changeview(t_build *param)
 {
 	mlx_destroy_image(param->graph.mlx_ptr, param->graph.img.img_ptr);
 	param->graph.img.img_ptr = mlx_new_image(param->graph.mlx_ptr,
-		WIDTH, HEIGHT);
-	find_mid(param);
+	WIDTH, HEIGHT);
+	if (param->move.proj == 0)
+		find_mid_para(param);
+	else
+		find_mid_iso(param);
 	view(param);
 	mlx_put_image_to_window(param->graph.mlx_ptr, param->graph.mlx_window,
 	param->graph.img.img_ptr, 0, 0);
@@ -67,7 +70,6 @@ static void		movemap(int keycode, t_build *param)
 {
 	if (keycode == 123)
 	{
-		printf("midx = %d\n", param->map.midx);
 		changeview(param);
 	}
 }
@@ -76,13 +78,13 @@ static void	zoom(int keycode, t_build *param)
 {	
 	if (keycode == 78)
 	{
-		if (param->map.spc > 0)
+		if (param->map.spc >= 3)
 			param->map.spc -= 1;
 		changeview(param);
 	}
 	else
 	{
-		if (param->map.spc <= 80)
+		if (((param->map.spc + 1) * param->map.taille * param->map.hauteur) < ((HEIGHT * WIDTH) / 4))
 			param->map.spc += 1;
 		changeview(param);
 	}
@@ -90,10 +92,9 @@ static void	zoom(int keycode, t_build *param)
 
 int				key_hook(int keycode, t_build *param)
 {
-	printf("%d\n", keycode);
 	if (keycode == 53)
 		exit(0);
-	if (keycode == 34)
+	if (keycode == 35)
 	{
 		param->move.proj = param->move.proj == 0 ? 1 : 0;
 		changeview(param);
