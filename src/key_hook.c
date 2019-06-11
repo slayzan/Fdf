@@ -30,11 +30,12 @@ static void		changecolor2(int keycode, t_build *param)
 {
 	if (keycode == 5)
 	{
+		if (param->move.color != 0xFFFFFF || param->move.color != 0x00FF00)
+			param->move.color = 0xFFFFFF;
 		if (param->move.color == 0xFFFFFF || param->move.color == 0x00FF00)
 			param->move.color = 0x00FF00;
 		else
 			param->move.color = param->move.color == 0xFF0000 ? 0xFFFF00 : 0x00FFFF;
-		changeview(param);
 	}
 	if (keycode == 15)
 	{
@@ -42,36 +43,36 @@ static void		changecolor2(int keycode, t_build *param)
 			param->move.color = 0xFF0000;
 		else
 			param->move.color = param->move.color == 0x00FF00 ? 0xFFFF00 : 0xFF00FF;
-		changeview(param);
 	}
 }
 
 static void		changecolor(int keycode, t_build *param)
 {
-	if (param->move.color == 0x00FFFF || param->move.color == 0xFF00FF ||
-		param->move.color == 0xFFFF00)
-	{
-		param->move.color = 0xFFFFFF;
-		changeview(param);
-	}
-	else if (keycode == 11)
+	/*if (param->move.color == 0x00FFFF || param->move.color == 0xFF00FF || param->move.color == 0xFFFF00)
+		changecolor3(keycode, param);*/
+	if (keycode == 11)
 	{
 		if (param->move.color == 0xFFFFFF || param->move.color == 0x0000FF)
 			param->move.color = 0x0000FF;
 		else
 			param->move.color = param->move.color == 0x00FF00 ? 0x00FFFF : 0xFF00FF;
-		changeview(param);
 	}
 	else
 		changecolor2(keycode, param);
+	changeview(param);
 }
 
 static void		movemap(int keycode, t_build *param)
 {
 	if (keycode == 123)
-	{
-		changeview(param);
-	}
+		param->move.movex -= 10;
+	if (keycode == 124)
+		param->move.movex += 10;
+	if (keycode == 125)
+		param->move.movey += 10;
+	if (keycode == 126)
+		param->move.movey -= 10;
+	changeview(param);
 }
 
 static void	zoom(int keycode, t_build *param)

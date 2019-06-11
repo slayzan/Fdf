@@ -45,8 +45,8 @@ void			find_mid_para(t_build *param)
 		y -= param->map.spc;
 		j--;
 	}
-	param->map.midx = x;
-	param->map.midy = y;
+	param->map.midx = x + param->move.movex;
+	param->map.midy = y + param->move.movey;
 }
 
 void			find_mid_iso(t_build *param)
@@ -63,8 +63,8 @@ void			find_mid_iso(t_build *param)
 		y -= param->map.spc;
 		j--;
 	}
-	param->map.midx = x;
-	param->map.midy = y;
+	param->map.midx = x + param->move.movex;
+	param->map.midy = y + param->move.movey;
 }
 
 void			init_window(t_build *param)
@@ -76,6 +76,8 @@ void			init_window(t_build *param)
 	y = 0;
 	param->move.proj = 0;
 	param->move.color = 0xFFFFFF;
+	param->move.movex = 0;
+	param->move.movey = 0;
 	param->first = 1;
 	param->graph.mlx_ptr = mlx_init();
 	param->graph.mlx_window = mlx_new_window(param->graph.mlx_ptr, WIDTH, HEIGHT
