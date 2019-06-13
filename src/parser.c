@@ -65,10 +65,7 @@ static int		check_str(t_build *param, int fd)
 		if (flag == 0)
 		{
 			if (!(words = ft_countwords(line)))
-			{
-				ft_putendl("error file");
 				return (0);
-			}
 			flag = 1;
 			param->map.taille = words;
 		}
@@ -92,7 +89,9 @@ int				parser(t_build *param)
 	int		fd;
 
 	fd = open(param->name, O_RDONLY);
-	if (!(check_str(param, fd)))
+	if (fd == -1)
+		return (0);
+	if (check_str(param, fd) == 0)
 	{
 		close(fd);
 		return (0);

@@ -67,6 +67,15 @@ void			find_mid_iso(t_build *param)
 	param->map.midy = y + param->move.movey;
 }
 
+static void		init_var(t_build *param)
+{
+	param->move.proj = 0;
+	param->move.color = 0xFFFFFF;
+	param->move.movex = 0;
+	param->move.movey = 0;
+	param->first = 1;
+}
+
 void			init_window(t_build *param)
 {
 	int		i;
@@ -74,11 +83,7 @@ void			init_window(t_build *param)
 
 	i = 0;
 	y = 0;
-	param->move.proj = 0;
-	param->move.color = 0xFFFFFF;
-	param->move.movex = 0;
-	param->move.movey = 0;
-	param->first = 1;
+	init_var(param);
 	param->graph.mlx_ptr = mlx_init();
 	param->graph.mlx_window = mlx_new_window(param->graph.mlx_ptr, WIDTH, HEIGHT
 	, param->name);

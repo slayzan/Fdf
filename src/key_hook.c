@@ -30,31 +30,33 @@ static void		changecolor2(int keycode, t_build *param)
 {
 	if (keycode == 5)
 	{
-		if (param->move.color != 0xFFFFFF || param->move.color != 0x00FF00)
+		if (param->move.color == 0xFF00FF)
 			param->move.color = 0xFFFFFF;
-		if (param->move.color == 0xFFFFFF || param->move.color == 0x00FF00)
+		else  if (param->move.color == 0xFFFFFF || param->move.color == 0x00FF00)
 			param->move.color = 0x00FF00;
-		else
+		else if (param->move.color != 0xFFFF00 && param->move.color != 0x00FFFF)
 			param->move.color = param->move.color == 0xFF0000 ? 0xFFFF00 : 0x00FFFF;
 	}
 	if (keycode == 15)
 	{
-		if (param->move.color == 0xFFFFFF || param->move.color == 0xFF0000)
+		if (param->move.color == 0x00FFFF)
+			param->move.color = 0xFFFFFF;
+		else if (param->move.color == 0xFFFFFF || param->move.color == 0xFF0000)
 			param->move.color = 0xFF0000;
-		else
+		else if (param->move.color != 0xFFFF00 && param->move.color != 0xFF00FF)
 			param->move.color = param->move.color == 0x00FF00 ? 0xFFFF00 : 0xFF00FF;
 	}
 }
 
 static void		changecolor(int keycode, t_build *param)
 {
-	/*if (param->move.color == 0x00FFFF || param->move.color == 0xFF00FF || param->move.color == 0xFFFF00)
-		changecolor3(keycode, param);*/
 	if (keycode == 11)
 	{
-		if (param->move.color == 0xFFFFFF || param->move.color == 0x0000FF)
+		if (param->move.color == 0xFFFF00)
+			param->move.color = 0xFFFFFF;
+		else if (param->move.color == 0xFFFFFF || param->move.color == 0x0000FF)
 			param->move.color = 0x0000FF;
-		else
+		else if (param->move.color != 0x00FFFF && param->move.color != 0xFF00FF)
 			param->move.color = param->move.color == 0x00FF00 ? 0x00FFFF : 0xFF00FF;
 	}
 	else
@@ -62,15 +64,28 @@ static void		changecolor(int keycode, t_build *param)
 	changeview(param);
 }
 
-static void		movemap(int keycode, t_build *param)
+static void		movemap_para(int keycode, t_build *param)
 {
-	if (keycode == 123)
+	if (keycode == 123 && param->map.midx - 10 > 0)
 		param->move.movex -= 10;
-	if (keycode == 124)
+	if (keycode == 124 && param->map.midx + (param->map.taille * param->map.spc) + 10 < 1280)
 		param->move.movex += 10;
-	if (keycode == 125)
+	if (keycode == 125 && param->map.midy + 10 < 720)
 		param->move.movey += 10;
-	if (keycode == 126)
+	if (keycode == 126 && param->map.midy - 10 > param->map.hauteur * param->map.spc)
+		param->move.movey -= 10;
+	changeview(param);
+}
+
+static void		movemap_iso(int keycode, t_build *param)
+{
+	if (keycode == 123 && param->map.midx - 10 > (param->map.taille * param->map.spc) / 2)
+		param->move.movex -= 10;
+	if (keycode == 124 && param->map.midx + param->map.taille * param->map.spc < 1380)
+		param->move.movex += 10;
+	if (keycode == 125 && param->map.midy + ((param->map.hauteur * param->map.spc) + (param->map.taille * param->map.spc)) / 2 - 10 < 720)
+		param->move.movey += 10;
+	if (keycode == 126 && param->map.midy - 10 > 0)
 		param->move.movey -= 10;
 	changeview(param);
 }
@@ -103,10 +118,13 @@ int				key_hook(int keycode, t_build *param)
 	if (keycode == 11 || keycode == 5 || keycode == 15)
 		changecolor(keycode, param);
 	if (keycode == 123 || keycode == 124 || keycode == 125 || keycode == 126)
-		movemap(keycode, param);
+	{
+		if (param->move.proj == 1)
+			movemap_iso(keycode, param);
+		else
+			movemap_para(keycode, param);
+	}
 	if (keycode == 78 || keycode == 69)
 		zoom(keycode, param);
 	return (0);
 }
-
-
