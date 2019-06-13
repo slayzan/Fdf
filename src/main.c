@@ -14,18 +14,18 @@
 
 int		main(int argc, char **argv)
 {
-	t_build		*param;
+	t_build		param;
 
 	if (argc == 2)
 	{
-		param->name = argv[1];
-		if (parser(param) == 0)
+		param.name = argv[1];
+		if (parser(&param) == 0)
 		{
 			ft_putstr("error file\n");
 			return (0);
 		}
 		else
-			init_window(param);
+			init_window(&param);
 	}
 	return (0);
 }
