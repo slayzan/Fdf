@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 17:09:28 by kwatanab          #+#    #+#             */
-/*   Updated: 2019/06/06 11:03:49 by humarque         ###   ########.fr       */
+/*   Updated: 2019/06/14 16:31:29 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ void		horizontal(int *x, int *y, int *xy, t_build *param)
 	}
 }
 
-void		bresenham(int x1, int y1, int x2, int y2, t_build *param)
+void		bresenham(int *xy1, int x2, int y2, t_build *param)
 {
 	int		xy[2];
 	int		x[2];
 	int		y[2];
 
-	xy[0] = x1;
-	xy[1] = y1;
+	xy[0] = xy1[0];
+	xy[1] = xy1[1];
 	x[0] = abs(x2 - xy[0]);
 	y[0] = abs(y2 - xy[1]);
 	x[1] = xy[0] < x2 ? 1 : -1;

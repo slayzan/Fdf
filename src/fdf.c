@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 15:03:51 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/11 17:24:14 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/06/14 16:34:54 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,14 @@ static void		init_var(t_build *param)
 
 void			init_window(t_build *param)
 {
-	int		i;
-	int		y;
-
-	i = 0;
-	y = 0;
 	init_var(param);
 	param->graph.mlx_ptr = mlx_init();
-	param->graph.mlx_window = mlx_new_window(param->graph.mlx_ptr, WIDTH, HEIGHT
-	, param->name);
-	param->graph.img.img_ptr = mlx_new_image(param->graph.mlx_ptr, WIDTH, HEIGHT);
-	param->graph.img.data = (int *)mlx_get_data_addr(param->graph.img.img_ptr
-	, &param->graph.img.bpp, &param->graph.img.size_l, &param->graph.img.endian);
+	param->graph.mlx_window = mlx_new_window(param->graph.mlx_ptr, WIDTH,
+	HEIGHT, param->name);
+	param->graph.img.img_ptr = mlx_new_image(param->graph.mlx_ptr, WIDTH,
+	HEIGHT);
+	param->graph.img.data = (int *)mlx_get_data_addr(param->graph.img.img_ptr,
+	&param->graph.img.bpp, &param->graph.img.size_l, &param->graph.img.endian);
 	spc_finder(param);
 	find_mid_para(param);
 	view(param);

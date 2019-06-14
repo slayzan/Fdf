@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser.c                                        :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: humarque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 17:57:16 by humarque          #+#    #+#             */
-/*   Updated: 2019/05/21 14:31:30 by humarque         ###   ########.fr       */
+/*   Updated: 2019/06/14 16:14:54 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,26 @@ static void		ft_freesave(char **save)
 	ft_memdel((void **)&save);
 }
 
-static int		check_str(t_build *param, int fd)
+static t_build	*grille(t_build *param, char **save, int *i, int *p)
 {
-	char	*line;
+	while (save[*i])
+	{
+		param->map.grille[*p] = ft_atoi(save[*i]);
+		*i += 1;
+		*p += 1;
+	}
+	param->map.hauteur++;
+	return (param);
+}
+
+static int		check_str(t_build *param, int fd, char *line)
+{
 	char	**save;
 	int		words;
 	int		i;
 	int		flag;
 	int		p;
 
-	line = NULL;
 	flag = 0;
 	p = 0;
 	param->map.hauteur = 0;
@@ -71,13 +81,7 @@ static int		check_str(t_build *param, int fd)
 		}
 		save = ft_strsplit(line, ' ');
 		i = 0;
-		while (save[i])
-		{
-			param->map.grille[p] = ft_atoi(save[i]);
-			i++;
-			p++;
-		}
-		param->map.hauteur++;
+		param = grille(param, save, &i, &p);
 		ft_freesave(save);
 		free(line);
 	}
@@ -87,11 +91,13 @@ static int		check_str(t_build *param, int fd)
 int				parser(t_build *param)
 {
 	int		fd;
+	char	*line;
 
 	fd = open(param->name, O_RDONLY);
+	line = NULL;
 	if (fd == -1)
 		return (0);
-	if (check_str(param, fd) == 0)
+	if (check_str(param, fd, line) == 0)
 	{
 		close(fd);
 		return (0);

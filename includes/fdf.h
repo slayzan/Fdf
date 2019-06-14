@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:58:25 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/11 17:19:08 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/06/14 16:25:03 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct	s_build
 int				parser(t_build *param);
 void			init_window(t_build *param);
 void			view(t_build *param);
-void			bresenham(int x1, int y1, int x2, int y2, t_build *param);
+void			bresenham(int* xy1, int x2, int y2, t_build *param);
 void			isometric(int x, int y, t_build *param, int i,
 int j);
 void			find_mid_iso(t_build *param);

@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 11:05:29 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/11 18:34:21 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/06/14 16:37:04 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	isometric(int x, int y, t_build *param, int i, int j)
 	int		prev_y;
 	int		savex;
 	int		savey;
+	int		xy1[2];
 
 	prev_x = x;
 	prev_y = y;
@@ -44,22 +45,18 @@ void	isometric(int x, int y, t_build *param, int i, int j)
 	if (prev_y >= param->map.spc)
 	{
 		savey = prev_y - param->map.spc;
-		if ((x > 0 && x < WIDTH) && (y > 0 && y < HEIGHT) &&
-		(calx(prev_x, savey, param) > 0 && calx(prev_x, savey, param) < WIDTH)
-		&& (caly(prev_x, savey, j, param) > 0 &&
-		caly(prev_x, savey, j, param) < HEIGHT))
-			bresenham(x, y, calx(prev_x, savey, param),
-			caly(prev_x, savey, j, param), param);
+		xy1[0] = x;
+		xy1[1] = y;
+		bresenham(xy1, calx(prev_x, savey, param),
+		caly(prev_x, savey, j, param), param);
 	}
 	if (prev_x != 0)
 	{
-		if ((x > 0 && x < WIDTH) && (y > 0 && y < HEIGHT) &&
-		(param->map.sx > 0 && param->map.sx < WIDTH) &&
-		(param->map.sy > 0 && param->map.sy < HEIGHT))
-			bresenham(x, y, param->map.sx, param->map.sy, param);
+		xy1[0] = x;
+		xy1[1] = y;
+		bresenham(xy1, param->map.sx, param->map.sy, param);
 	}
 	param->map.sy = y;
 	param->map.sx = x;
-	if ((x > 0 && x < WIDTH) && (y > 0 && y < HEIGHT))
-		param->graph.img.data[y * WIDTH + x] = param->move.color;
+	param->graph.img.data[y * WIDTH + x] = param->move.color;
 }
