@@ -6,11 +6,19 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 15:46:39 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/14 16:35:36 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/06/17 16:32:35 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+static t_build	*draw_iso2(t_build *param, int *x, int *y)
+{
+	*x = 0;
+	*y += param->map.spc;
+	param->first = 1;
+	return (param);
+}
 
 static void		draw_iso(t_build *param)
 {
@@ -18,6 +26,7 @@ static void		draw_iso(t_build *param)
 	int		y;
 	int		i;
 	int		j;
+	int		xy[2];
 
 	param->first = 0;
 	x = 0;
@@ -28,12 +37,10 @@ static void		draw_iso(t_build *param)
 	y < param->map.hauteur * param->map.spc - param->map.spc)
 	{
 		if (x == param->map.taille * param->map.spc)
-		{
-			x = 0;
-			y += param->map.spc;
-			param->first = 1;
-		}
-		isometric(x, y, param, i, j);
+			param = draw_iso2(param, &x, &y);
+		xy[0] = x;
+		xy[1] = y;
+		isometric(xy, param, i, j);
 		x += param->map.spc;
 		i++;
 		if (y >= 1)
@@ -41,35 +48,13 @@ static void		draw_iso(t_build *param)
 	}
 }
 
-static void		cadre(t_build *param, int function, int x)
+static t_build	*draw_para2(t_build *param, int *first)
 {
-	int		i;
-	int		xy1[2];
-
-	i = 0;
-	if (function)
-	{
-		while (++i < param->map.spc + 1)
-		{
-			xy1[0] = param->map.sx;
-			xy1[1] = param->map.sy;
-			bresenham(xy1, param->map.sx, param->map.sy - 1, param);
-			param->map.sy--;
-		}
-	}
-	else
-	{
-		while (++i < param->map.spc + 1)
-		{
-			param->map.sx++;
-			if (x != param->map.taille - 1)
-			{
-				xy1[0] = param->map.sx - 1;
-				xy1[1] = param->map.midy;
-				bresenham(xy1, param->map.sx, param->map.midy, param);
-			}
-		}
-	}
+	param->map.midy = param->map.midy + param->map.spc;
+	param->map.sy = param->map.midy;
+	param->map.sx = param->map.midx;
+	*first = 1;
+	return (param);
 }
 
 static void		draw_para(t_build *param)
@@ -90,15 +75,12 @@ static void		draw_para(t_build *param)
 			param->graph.img.data[param->map.midy * WIDTH + param->map.sx] =
 			param->move.color;
 			if (first)
-				cadre(param, 1, x);
+				cadre1(param, x);
 			param->map.sy = param->map.midy;
-			cadre(param, 0, x);
+			cadre2(param, x);
 			x++;
 		}
-		param->map.midy = param->map.midy + param->map.spc;
-		param->map.sy = param->map.midy;
-		param->map.sx = param->map.midx;
-		first = 1;
+		param = draw_para2(param, &first);
 		y++;
 		i++;
 	}
