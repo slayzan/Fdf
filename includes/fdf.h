@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 15:58:25 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/17 16:21:28 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/06/17 16:45:46 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,7 @@ void			find_mid_para(t_build *param);
 int				key_hook(int keycode, t_build *param);
 void			cadre1(t_build *param, int x);
 void			cadre2(t_build *param, int x);
+void			movemap_iso(int keycode, t_build *param);
+void			movemap_para(int keycode, t_build *param);
+void			changeview(t_build *param);
 #endif
