@@ -48,7 +48,7 @@ static void		draw_iso(t_build *param)
 	}
 }
 
-void	parra(t_build *param, int x, int y)
+void			parra(t_build *param, int x, int y)
 {
 	int tabxy[2];
 	int x2;
@@ -56,21 +56,24 @@ void	parra(t_build *param, int x, int y)
 
 	x2 = x * param->map.spc;
 	y2 = y * param->map.spc;
-
-	tabxy[0] = param->map.midx + x2 + param->map.grille[x + (param->map.taille * y)] * - 4;
-	tabxy[1] = param->map.midy + y2 + param->map.grille[x + (param->map.taille * y)]* - 4;
+	tabxy[0] = param->map.midx + x2 + param->map.grille[x +
+	(param->map.taille * y)] * -2;
+	tabxy[1] = param->map.midy + y2 + param->map.grille[x +
+	(param->map.taille * y)] * -2;
 	if (x2 / param->map.spc < param->map.taille - 1)
-	bresenham(tabxy, param->map.midx + (x2 + param->map.spc)
-			+ param->map.grille[x + 1 + (param->map.taille * y)] * -4,
-			param->map.midy + y2 + param->map.grille[x + 1 + (param->map.taille * y)] * - 4, param);
-	 if (y2 / param->map.spc < param->map.hauteur - 1)
-		 bresenham(tabxy, param->map.midx + x2 + param->map.grille[x+ (param->map.taille * (y + 1))] * -4,
-			 param->map.midy + (y2 + param->map.spc)
-			 + param->map.grille[x + (param->map.taille * (y + 1))] * -4, param);
-			 
+		bresenham(tabxy, param->map.midx + (x2 + param->map.spc)
+	+ param->map.grille[x + 1 + (param->map.taille * y)] * -2,
+	param->map.midy + y2 +
+	param->map.grille[x + 1 + (param->map.taille * y)] * -2, param);
+	if (y2 / param->map.spc < param->map.hauteur - 1)
+		bresenham(tabxy, param->map.midx + x2 + param->map.grille
+			[x + (param->map.taille * (y + 1))] * -2,
+			param->map.midy + (y2 + param->map.spc)
+			+ param->map.grille[x + (param->map.taille
+			* (y + 1))] * -2, param);
 }
 
-void	draw_para(t_build *param)
+void			draw_para(t_build *param)
 {
 	int	x;
 	int y;
@@ -80,16 +83,14 @@ void	draw_para(t_build *param)
 	while (x < param->map.taille ||
 	y < param->map.hauteur - 1)
 	{
-	
 		if (x == param->map.taille)
 		{
 			x = 0;
 			y++;
 		}
-		parra(param, x ,y);
+		parra(param, x, y);
 		x++;
 	}
-
 }
 
 void			view(t_build *param)
