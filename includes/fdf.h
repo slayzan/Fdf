@@ -67,7 +67,7 @@ typedef struct	s_build
 int				parser(t_build *param);
 void			init_window(t_build *param);
 void			view(t_build *param);
-void			bresenham(int* xy1, int x2, int y2, t_build *param);
+void			bresenham(int *xy1, int x2, int y2, t_build *param);
 void			isometric(int *xy, t_build *param, int i, int j);
 void			find_mid_iso(t_build *param);
 void			find_mid_para(t_build *param);
