@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 15:03:51 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/14 16:34:54 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/06/18 16:21:20 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void			find_mid_iso(t_build *param)
 
 static void		init_var(t_build *param)
 {
-	param->move.proj = 0;
+	param->move.proj = 1;
 	param->move.color = 0xFFFFFF;
 	param->move.movex = 0;
 	param->move.movey = 0;

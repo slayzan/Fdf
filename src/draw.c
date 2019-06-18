@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 15:46:39 by humarque          #+#    #+#             */
-/*   Updated: 2019/06/17 16:32:35 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/06/18 17:59:00 by humarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,42 +48,48 @@ static void		draw_iso(t_build *param)
 	}
 }
 
-static t_build	*draw_para2(t_build *param, int *first)
+void	parra(t_build *param, int x, int y)
 {
-	param->map.midy = param->map.midy + param->map.spc;
-	param->map.sy = param->map.midy;
-	param->map.sx = param->map.midx;
-	*first = 1;
-	return (param);
+	int tabxy[2];
+	int x2;
+	int y2;
+
+	x2 = x * param->map.spc;
+	y2 = y * param->map.spc;
+
+	tabxy[0] = param->map.midx + x2 + param->map.grille[x + (param->map.taille * y)] * - 4;
+	tabxy[1] = param->map.midy + y2 + param->map.grille[x + (param->map.taille * y)]* - 4;
+	if (x2 / param->map.spc < param->map.taille - 1)
+	bresenham(tabxy, param->map.midx + (x2 + param->map.spc)
+			+ param->map.grille[x + 1 + (param->map.taille * y)] * -4,
+			param->map.midy + y2 + param->map.grille[x + 1 + (param->map.taille * y)] * - 4, param);
+	 if (y2 / param->map.spc < param->map.hauteur - 1)
+		 bresenham(tabxy, param->map.midx + x2 + param->map.grille[x+ (param->map.taille * (y + 1))] * -4,
+			 param->map.midy + (y2 + param->map.spc)
+			 + param->map.grille[x + (param->map.taille * (y + 1))] * -4, param);
+			 
 }
 
-static void		draw_para(t_build *param)
+void	draw_para(t_build *param)
 {
-	int		x;
-	int		i;
-	int		y;
-	int		first;
+	int	x;
+	int y;
 
-	i = 0;
+	x = 0;
 	y = 0;
-	first = 0;
-	while (y < param->map.hauteur)
+	while (x < param->map.taille ||
+	y < param->map.hauteur - 1)
 	{
-		x = 0;
-		while (x < param->map.taille)
+	
+		if (x == param->map.taille)
 		{
-			param->graph.img.data[param->map.midy * WIDTH + param->map.sx] =
-			param->move.color;
-			if (first)
-				cadre1(param, x);
-			param->map.sy = param->map.midy;
-			cadre2(param, x);
-			x++;
+			x = 0;
+			y++;
 		}
-		param = draw_para2(param, &first);
-		y++;
-		i++;
+		parra(param, x ,y);
+		x++;
 	}
+
 }
 
 void			view(t_build *param)
